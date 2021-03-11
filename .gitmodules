@@ -37,3 +37,6 @@
 [submodule "ckan/submodules/ckanext-composite"]
 	path = ckan/submodules/ckanext-composite
 	url = https://github.com/cioos-siooc/ckanext-composite.git
+[submodule "ckan/submodules/ckanext-harvest"]
+	path = ckan/submodules/ckanext-harvest
+	url = https://github.com/cioos-siooc/ckanext-harvest.git
