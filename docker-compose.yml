@@ -1,0 +1,85 @@
+version: "3.7"
+
+x-ckan-environment-defaults: &ckan-environment-defaults
+  CKAN_SQLALCHEMY_URL: postgresql://ckan:${POSTGRES_PASSWORD}@db/ckan
+  CKAN_DATASTORE_WRITE_URL: postgresql://ckan:${POSTGRES_PASSWORD}@db/datastore
+  CKAN_DATASTORE_READ_URL: postgresql://datastore_ro:${DATASTORE_READONLY_PASSWORD}@db/datastore
+  CKAN_SOLR_URL: http://solr:8983/solr/ckan
+  CKAN_REDIS_URL: redis://redis:6379/1
+  CKAN_DATAPUSHER_URL: http://datapusher:8800
+  CKAN_SITE_URL: ${CKAN_SITE_URL}
+  CKAN_MAX_UPLOAD_SIZE_MB: ${CKAN_MAX_UPLOAD_SIZE_MB}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  DS_RO_PASS: ${DATASTORE_READONLY_PASSWORD}
+
+x-ckan-defaults: &ckan_defaults
+  environment: *ckan-environment-defaults
+  volumes:
+    - "/etc/localtime:/etc/localtime:ro"
+    - ckan_storage:/var/lib/ckan
+
+services:
+  ckan:
+    <<: *ckan_defaults
+    build:
+      context: ./ckan
+      target: ckan
+    ports:
+      - "${CKAN_PORT}:5000"
+    depends_on:
+      - db
+      - redis
+      - solr
+
+  ckan_gather_harvester:
+    <<: *ckan_defaults
+    build:
+      context: ./ckan
+      target: ckan_gather_harvester
+    ports: []
+
+  ckan_fetch_harvester:
+    <<: *ckan_defaults
+    build:
+      context: ./ckan
+      target: ckan_fetch_harvester
+    restart: on-failure
+    ports: []
+
+  ckan_run_harvester:
+    <<: *ckan_defaults
+    build:
+      context: ./ckan
+      target: ckan_run_harvester
+    ports: []
+
+  datapusher:
+    image: clementmouchet/datapusher
+    ports:
+      - "8800:8800"
+
+  db:
+    build: ./db
+    environment:
+      - DS_RO_PASS=${DATASTORE_READONLY_PASSWORD}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  solr:
+    build: ./solr
+    volumes:
+      - solr_data:/opt/solr/server/solr/ckan/data
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          memory: 300M
+
+  redis:
+    image: redis:latest
+
+volumes:
+  ckan_storage:
+  solr_data:
+  pg_data:

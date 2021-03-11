@@ -1,0 +1,39 @@
+[submodule "ckan/submodules/OWSLib"]
+	path = ckan/submodules/OWSLib
+	url = https://github.com/geopython/OWSLib.git
+[submodule "ckan/submodules/cioos-siooc-schema"]
+	path = ckan/submodules/cioos-siooc-schema
+	url = https://github.com/cioos-siooc/cioos-siooc-schema.git
+[submodule "ckan/submodules/ckanext-cioos_harvest"]
+	path = ckan/submodules/ckanext-cioos_harvest
+	url = https://github.com/cioos-siooc/ckanext-cioos_harvest.git
+[submodule "ckan/submodules/ckanext-cioos_theme"]
+	path = ckan/submodules/ckanext-cioos_theme
+	url = https://github.com/cioos-siooc/ckanext-cioos_theme.git
+[submodule "ckan/submodules/pycsw"]
+	path = ckan/submodules/pycsw
+	url = https://github.com/geopython/pycsw.git
+[submodule "ckan/submodules/ckanext-spatial"]
+	path = ckan/submodules/ckanext-spatial
+	url = https://github.com/cioos-siooc/ckanext-spatial.git
+[submodule "ckan/submodules/ckanext-scheming"]
+	path = ckan/submodules/ckanext-scheming
+	url = https://github.com/cioos-siooc/ckanext-scheming.git
+[submodule "ckan/submodules/ckanext-repeating"]
+	path = ckan/submodules/ckanext-repeating
+	url = https://github.com/open-data/ckanext-repeating.git
+[submodule "ckan/submodules/ckanext-googleanalyticsbasic"]
+	path = ckan/submodules/ckanext-googleanalyticsbasic
+	url = https://github.com/cioos-siooc/ckanext-googleanalyticsbasic.git
+[submodule "ckan/submodules/ckanext-geoview"]
+	path = ckan/submodules/ckanext-geoview
+	url = https://github.com/ckan/ckanext-geoview.git
+[submodule "ckan/submodules/ckanext-fluent"]
+	path = ckan/submodules/ckanext-fluent
+	url = https://github.com/cioos-siooc/ckanext-fluent.git
+[submodule "ckan/submodules/ckanext-dcat"]
+	path = ckan/submodules/ckanext-dcat
+	url = https://github.com/ckan/ckanext-dcat.git
+[submodule "ckan/submodules/ckanext-composite"]
+	path = ckan/submodules/ckanext-composite
+	url = https://github.com/cioos-siooc/ckanext-composite.git
